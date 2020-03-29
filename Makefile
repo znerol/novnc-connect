@@ -10,7 +10,7 @@ buildconf ?= release
 builddir := $(shell swift build --configuration $(buildconf) --show-bin-path)
 
 build:
-	swift build -c $(buildconf)
+	swift build --configuration $(buildconf) --static-swift-stdlib
 
 install: build
 	install -d "$(bindir)"
