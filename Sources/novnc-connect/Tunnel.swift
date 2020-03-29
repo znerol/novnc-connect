@@ -17,7 +17,7 @@ struct Tunnel {
             .serverChannelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
             .childChannelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)
             .childChannelInitializer { channel in
-                channel.pipeline.add(handler: WebTunnel(url: self.url)!)
+                channel.pipeline.add(handler: WebTunnel(url: self.url))
             }
 
         let sock = bootstrap.bind(to: try! SocketAddress(ipAddress: "::1", port: 0))
