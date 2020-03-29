@@ -1,0 +1,13 @@
+---
+branches:
+  - master
+plugins:
+  - - "@semantic-release/exec"
+    - prepareCmd: >
+        /usr/bin/make dmg versionnumber=${nextRelease.version} versioncode=${process.env.TRAVIS_BUILD_NUMBER} >&2
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - - "@semantic-release/github"
+    - assets:
+      - path: Build/dmg/*.dmg
+      - path: Build/dmg/*sum.txt

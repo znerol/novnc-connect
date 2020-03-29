@@ -2,11 +2,24 @@
 os: osx
 osx_image: xcode9.4
 
+env:
+  global:
+    # GH_TOKEN
+    secure: t2iGuUc6BxHnqCIeyGliIAGLcz/pQVz1/W+yFhxuwezdJK9h/IRi6hvuBLJjK3YQEc5IpJ2x0XbsMierXCR7Rb1/SLlw7LaaIA/3ledjeU9dEhMI9tHY0TrEC/p6FAiXA9z4zAUw44aj5554cZrM3EMPLs30+BX5EiroA/Q1lMdqUytFErtBkHWxvgFcgB2X5wgOzLAjzFjfrMM648tXHv8cuha8YNhkrEoJT4gKp4Rn1VywFzkGC0cNCTzVYrIUAG1wKmCNSDxKG+YkZ28uq+A4G1GMNkSJI58mhjcaPXWwWnlY6/fOLpYmAhtdaie50F7ukLPxDhHK+oFjmcqq7xYAh77L6BC0GW4efYWMCnOqElcYVix83yns9LVIru97Ab+Y5rOiYsoYGhwri4A1rfjwkQ8WZl5yYozv/ML05t+Dtx5tHUFl/VMukrUp7l1PmxMWz09g+HlmPsnvvcy46105dpuEBiOGjo/5ZP0xQ2oIsCvTVLJuFYmEVPdsgFZHWtuZj/jdhOvhlUbS0QV1bHMaas1G5D2tno0oghj1NvHwgUx2UlD6anr8PgZHmZ24jC9d43a9Y833+6DBYWYkaw/jcN09Sskizxg4tiySqDa7RzNzDYDY9OnrK+GG4XvHYUg31UHLmhJBBHL0ybcMLzUNJW/yCdo7S6h4qPLfPNY=
+
 stages:
   - name: Build
+  - name: Github release
+    if: branch = master AND type = push
 
 jobs:
   include:
     - stage: Build
       script:
         - make app
+
+    - stage: Github release
+      script:
+        - nvm install lts/*
+        - npm install semantic-release @semantic-release/exec
+        - npx semantic-release
