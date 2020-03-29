@@ -34,5 +34,8 @@ app: build
 dmg: app
 	install -d Build/dmg
 	hdiutil create -srcfolder Build/app -volname "$(appname) $(versionnumber)" "Build/dmg/$(appname) $(versionnumber).dmg"
+	cd Build/dmg && md5 "$(appname)"*.dmg > md5sum.txt
+	cd Build/dmg && shasum -a 1 "$(appname)"*.dmg > sha1sum.txt
+	cd Build/dmg && shasum -a 256 "$(appname)"*.dmg > sha256sum.txt
 
 .PHONY: build install uninstall clean app dmg
