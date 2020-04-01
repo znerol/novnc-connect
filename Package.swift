@@ -11,7 +11,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/znerol/socketwebify", from: "1.0.0"),
+        .package(url: "https://github.com/znerol/socketwebify", from: "1.0.1"),
     ],
     targets: [
         .target(name: "novnc-connect", dependencies: [
