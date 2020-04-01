@@ -19,7 +19,9 @@ jobs:
         - make app
 
     - stage: Github release
+      before_script:
+        - nvm --version
       script:
-        - nvm install 12
+        - nvm install --lts
         - npm install --global semantic-release @semantic-release/exec
         - npx semantic-release
